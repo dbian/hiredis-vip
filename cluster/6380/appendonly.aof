@@ -1,0 +1,16 @@
+*2
+$6
+SELECT
+$1
+0
+*5
+$4
+mset
+$4
+key1
+$7
+value-1
+$4
+key1
+$7
+value-1
