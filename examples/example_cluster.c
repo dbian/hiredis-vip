@@ -11,6 +11,7 @@ int main()
     redisClusterContext *cc;
 
     cc = redisClusterContextInit();
+    redisClusterSetOptionAuthPassword(cc, "aaa");
     redisClusterSetOptionAddNodes(cc, "127.0.0.1:6379,127.0.0.1:6380,127.0.0.1:6381");
     redisClusterConnect2(cc);
     if (cc == NULL || cc->err)
