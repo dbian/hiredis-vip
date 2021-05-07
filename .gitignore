@@ -5,3 +5,7 @@
 /*.dylib
 /*.a
 /*.pc
+target/
+cluster/
+build/
+.vscode/
