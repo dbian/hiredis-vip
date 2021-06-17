@@ -199,6 +199,10 @@ hiredis-example: examples/example.c $(STLIBNAME)
 hiredis-example_cluster: examples/example_cluster.c $(STLIBNAME)
 	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< $(STLIBNAME) $(REAL_LDFLAGS)
 
+val: hiredis-example_cluster
+	valgrind --leak-check=full ./examples/hiredis-example_cluster
+	# > valgrind.txt 2>&1
+
 hiredis-example-push: examples/example-push.c $(STLIBNAME)
 	$(CC) -o examples/$@ $(REAL_CFLAGS) -I. $< $(STLIBNAME) $(REAL_LDFLAGS)
 

@@ -34,6 +34,7 @@ int main()
         return -1;
     }
     printf("reply1->type:%d, reply->str:%s\n", reply->type, reply->str);
+    freeReplyObject(reply);
 
     reply = redisClusterCommand(cc, "lrange %s 0 -1", "1"); //eval \"\" 0
     if (reply == NULL)
@@ -57,6 +58,7 @@ int main()
     }
 
     printf("reply3->type:%d, reply->str:%s\n", reply->type, reply->str);
+    freeReplyObject(reply);
 
     int sz = 5;
     char **cmdlist = calloc(sz, sizeof(char *));
@@ -77,7 +79,8 @@ int main()
     // cmdlen[6] = strlen(cmdlist[6]);
     reply = redisClusterCommandArgv(cc, sz, cmdlist, cmdlen);
     printf("reply4->type:%d, reply->str:%s\n", reply->type, reply->str);
-
+    free(cmdlen);
+    free(cmdlist);
     freeReplyObject(reply);
 
     redisClusterContext *cc2;
@@ -104,9 +107,15 @@ int main()
         return -1;
     }
     printf("reply1->type:%d, reply->str:%s\n", reply->type, reply->str);
+    freeReplyObject(reply);
+    printf("free ctx\n");
 
     redisClusterFree(cc);
     redisClusterFree(cc2);
+    printf("test end\n");
+    int ccc;
+    sds *sd = sdssplitlen(ips, strlen(ips), ",", 1, &ccc);
+    sdsfreesplitres(sd, ccc);
 
     return 0;
 }

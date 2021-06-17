@@ -1,5 +1,11 @@
 set -e
 set -x
+if [ ! -d "conf" ];then
+mkdir conf
+fi
+if [ ! -d "data" ];then
+mkdir data
+fi
 for x in {1..64}
 do
     name=`printf "81%02d" $x`

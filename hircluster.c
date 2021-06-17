@@ -657,6 +657,7 @@ static cluster_node *node_get_with_nodes(
     sdsfree(ip_port[1]);
     free(ip_port);
 
+    sdsfree(node_infos[1]);
     node_infos[0] = NULL;
     node_infos[1] = NULL;
 
@@ -2591,6 +2592,7 @@ int redisClusterAuth(redisClusterContext *cc, redisContext *c)
                                "Command(Auth) reply error: reply->str is not OK.");
         goto error;
     }
+    freeReplyObject(reply);
     return REDIS_OK;
 error:
     if (reply != NULL)

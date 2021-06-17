@@ -14,8 +14,6 @@ do
     ipp2="127.0.0.1:$name,$ipp2"
 done
 
-sleep 5
-
 redis-cli -a aaa -p 8101 --cluster create $ipp --cluster-replicas 0 << EOF
 yes
 EOF
